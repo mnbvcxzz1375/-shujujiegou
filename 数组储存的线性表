@@ -1,0 +1,117 @@
+/**/#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
+#define maxsize 100
+#define L l
+#define Insert insert
+#define Find find
+#define FindKth findith
+#define Length length
+typedef int ElementType;
+typedef struct LNode* list;
+
+struct LNode {
+	ElementType Data[maxsize];
+	int last;
+};
+list l;
+
+list makeempty();
+int find(ElementType x, list l);
+void insert(ElementType x, int i, list l);
+void Delete(int i, list l);
+ElementType findith(int i, list l);
+int length(list l);
+
+list makeempty() {
+	list l;
+	l = (list)malloc(sizeof(struct LNode));
+	l->last = -1;
+	return l;
+}
+int find(ElementType x, list l) {
+	int i = 0;
+	while (i <= l->last && l->Data[i] != x)
+		i++;
+	if (l->last < i)  
+		return -1;
+	else 
+		return i;
+}
+
+void insert(ElementType x, int i, list l) {
+	int j;
+	if (l->last == maxsize - 1)
+	{
+		printf("full\n");
+		return;
+	}
+	if (i < 0 || l->last + 1 < i)
+	{
+		printf("位置不合法\n");
+		return;
+	}
+	for (j = l->last; j >= i; j--)
+	{
+		l->Data[j + 1] = l->Data[j];
+	}
+	l->Data[i] = x;
+	l->last++;
+	return;
+}
+
+void Delete(int i, list l) {
+	int j;
+	if (i < 0 || l->last + 1 < i)
+	{
+		printf("位置不合法\n");
+		return;
+	}
+	for (j = i; j <= l->last; j++)
+	{
+		l->Data[j - 1] = l->Data[j];
+	}
+	l->last--;
+	return;
+}
+
+ElementType findith(int i, list l) {
+	if (i < 0 || l->last + 1 > i)
+	{
+		printf("L->Data[%d]不存在元素", i);
+		return -1;
+	}
+	return l->Data[i];
+}
+
+int length(list l) {
+	return l->last;
+}
+
+int main() {
+	int i = 0;
+	l = makeempty();
+	insert(11, 0, l);
+	printf("在线性表L-Data[0]插入11\n");
+	insert(25, 0, L);
+	printf("在线性表L-Data[0]插入25\n");
+	insert(33, 0, L);
+	printf("在线性表L-Data[0]插入33\n");
+	Insert(77, 0, L);
+	printf("在线性表L-Data[0]插入77\n");
+	printf("此时的线性表为：");
+	for (i = 0; i < Length(L); i++)
+		printf("%d ", L->Data[i]);
+	printf("\n");
+	printf("查找值为12的下标是：%d\n", Find(12, L));
+	printf("下标为3的线性表的值是：%d\n", FindKth(3, L));
+	Delete(2, L);
+	printf("删除线性表中下标为2的元素\n");
+	Delete(2, L);
+	printf("删除线性表中下标为2的元素\n");
+	printf("此时的线性表为：");
+	for (i = 0; i < Length(L); i++)
+		printf("%d ", L->Data[i]);
+	printf("\n");
+	return 0;
+}
