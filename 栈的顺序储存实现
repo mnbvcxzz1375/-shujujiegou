@@ -1,0 +1,75 @@
+#include"标头.h"
+typedef struct SNode* stack;
+typedef struct SNode {
+	ElementType Data[maxsize];
+	int top;
+};
+
+stack creatstrack();
+int isfull(stack s);
+int isempty(stack s);
+void push(stack s, ElementType x);
+ElementType pop(stack s);
+
+stack creatstack() {
+	stack s;
+	s = (stack)malloc(sizeof(struct SNode));
+	s->top = -1;
+	return s;
+}
+
+int isfull(stack s) {
+	if (s->top == maxsize - 1)
+		return 1;
+	else
+		return 0;
+}
+
+int isempty(stack s) {
+	if (s->top == -1)
+		return 1;
+	else
+		return 0;
+}
+
+void push(stack s, ElementType x) {
+	if (isfull(s))
+	{
+		printf("堆栈满");
+		return;
+	}
+	else
+	{
+		s->top++;
+		s->Data[s->top] = x;
+		return;
+	}
+}
+
+ElementType pop(stack s) {
+	if (isempty(s))
+	{
+		printf("堆栈空");
+		return 0;
+	}
+	else
+	{
+		ElementType val = s->Data[s->top];
+		s->top--;
+		return val;
+	}
+}
+
+int main() {
+	Stack S;
+	S = CreateStack();
+	printf("5入栈\n");
+	Push(S, 5);
+	printf("7入栈\n");
+	Push(S, 7);
+	printf("66入栈\n");
+	Push(S, 66);
+	printf("%d出栈\n", Pop(S));
+	printf("%d出栈\n", Pop(S));
+	return 0;
+}
