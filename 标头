@@ -1,0 +1,26 @@
+#pragma once
+#include<stdio.h>
+#include<malloc.h>
+#include<math.h>
+#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
+#define maxsize 100
+#define L l
+#define Q q
+#define Next next
+#define Stack stack
+#define CreateStack creatstack
+#define Queue queue
+#define IsFull isfull
+#define IsEmpty isempty
+#define Push push
+#define Pop pop
+#define MakeEmpty makeempty
+#define Print print
+#define Insert insert
+#define Find find
+#define FindKth findith
+#define Length length
+typedef int ElementType;
+typedef int ElementType;
