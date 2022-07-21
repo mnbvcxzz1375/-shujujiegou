@@ -1,0 +1,163 @@
+#include<stdio.h>
+#include<malloc.h>
+#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
+#define maxsize 100
+#define L l
+#define MakeEmpty makeempty
+#define Print print
+#define Insert insert
+#define Find find
+#define FindKth findith
+#define Length length
+typedef int ElementType;
+typedef int ElementType;
+typedef struct LNode* list;
+struct LNode {
+	ElementType Data;
+	list next;
+};
+list l;
+list makeempty();
+int length(list l);
+list findith(int i, list l);
+list insert(ElementType x, int i, list l);
+list Delete(int i, list l);
+void print(list l);
+
+list makeempty() {
+	list l = (list)malloc(sizeof(struct LNode));
+	l = NULL;
+	return l;
+}
+
+int length(list l) {
+	list p = l;
+	int len = 0;
+	while (p != NULL) {
+		p = p->next;
+		len++;
+	}
+	return len;
+}
+
+list findith(int i, list l) {
+	list p = l;
+	int j = 1;
+	while (p != NULL && j < i)
+	{
+		p = p->next;
+		j++;
+	}
+	if (j == i)
+	{
+		return p;
+	}
+	else
+		return NULL;
+}
+
+list find(ElementType x, list l) {
+	list p = l;
+	while (p != NULL && p->Data != x)
+	{
+		p = p->next;
+	}
+	return p;
+}
+
+list insert(ElementType x, int i, list l) {
+	list p, s;
+	if (i == 1)
+	{
+		s = (list)malloc(sizeof(struct LNode));
+		s->Data = x;
+		s->next = l;
+		return s;
+	}
+	p = findith(i - 1, l);
+	if (p == NULL)
+	{
+		printf("节点错误\n");
+		return NULL;
+	}
+	else
+	{
+		s = (list)(malloc)(sizeof(struct LNode));
+		s->Data = x;
+		s->next = p->next;
+		p->next = s;
+		return l;
+	}
+}
+
+list Delete(int i, list l) {
+	list s, p;
+	if (i == 1) {
+		s = l;
+		if (l != NULL)
+			l = l->next;
+		else
+			return NULL;
+		free(s);
+		return l;
+	}
+	p = findith(i - 1, l);
+	if (p == NULL || (p->next) == NULL)
+	{
+		printf("节点错误\n");
+		return NULL;
+	}
+	else
+	{
+		s = p->next;
+		p->next = s->next;
+		free(s);
+		return l;
+	}
+}
+
+void print(list l) {
+	list t;
+	printf("当前链表为：");
+	int flag = 1;
+	for (t = l; t != NULL; t = t->next)
+	{
+		printf("%d  ", t->Data);
+		flag = 0;
+	}
+	if (flag)
+	{
+		printf("NULL");
+	}
+	printf("\n");
+}
+
+
+int main() {
+	L = MakeEmpty();
+	Print(L);
+	L = Insert(11, 1, L);
+	L = Insert(25, 1, L);
+	L = Insert(33, 2, L);
+	L = Insert(77, 3, L);
+	Print(L);
+	printf("当前链表长度为：%d\n", Length(L));
+	printf("此时链表中第二个结点的值是：%d\n", FindKth(2, L)->Data);
+	printf("查找22是否在该链表中：");
+	if (Find(22, L))
+		printf("是！\n");
+	else
+		printf("否！\n");
+	printf("查找33是否在该链表中：");
+	if (Find(33, L))
+		printf("是！\n");
+	else
+		printf("否！\n");
+	L = Delete(1, L);
+	L = Delete(3, L);
+	printf("----------删除后-----\n");
+	Print(L);
+	return 0;
+}
